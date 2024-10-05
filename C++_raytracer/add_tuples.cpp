@@ -4,24 +4,58 @@ using namespace std;
 
 class Tuple {
 public:
-    int x, y, z, w;
+    double x, y, z, w;
 
-    Tuple(int x, int y, int z, int w) : x(x), y(y), z(z), w(w) {}
+    Tuple(double x, double y, double z, double w) : x(x), y(y), z(z), w(w) {}
+
+    bool isPoint() const {
+        return w == 1.0;
+    }
+
+    bool isVector() const {
+        return w == 0.0;
+    }
 
     Tuple operator+(const Tuple& other) const {
         return Tuple (
             this-> x + other.x,
             this-> y + other.y,
             this-> z + other.z,
-            this-> w + other.w,
+            this-> w + other.w
         );
     }
 
+    Tuple operator-(const Tuple& other) const {
+        return Tuple (
+            this-> x - other.x,
+            this-> y - other.y,
+            z - other.z,
+            w - other.w
+        );
+    }
+
+    Tuple Neg() const {
+        return Tuple (
+            -1 * x,
+            -1 * y,
+            -1 * z,
+            -1 * w
+        );
+    }
 };
 
-int main(){
-    Tuple a1(3, -2, 5, 1);
-    Tuple a2(-2, 3, 1, 0);
-    Tuple a3 = a1 + a2;
+Tuple Point(double x, double y, double z) {
+    return Tuple(x, y, z, 1.0);
+}
 
+Tuple Vector(double x, double y, double z) {
+    return Tuple(x, y, z, 0.0);
+}
+
+int main(){
+    Tuple a(1, -2, 3, -4);
+
+    Tuple Neg1 = a.Neg();
+
+    cout << Neg1.x << Neg1.y << Neg1.z << Neg1.w;
 }
