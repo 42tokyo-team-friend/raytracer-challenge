@@ -40,3 +40,11 @@ func (t Tuple) Div(k float64) Tuple {
 func (t Tuple) Magnitude() float64 {
 	return math.Sqrt(t.x * t.x + t.y * t.y + t.z * t.z + t.w * t.w)
 }
+
+func (left Tuple) Dot(right Tuple) float64 {
+	return left.x * right.x + left.y * right.y + left.z * right.z + left.w * right.w;
+}
+
+func (left Tuple) Cross(right Tuple) Tuple {
+	return Vector(left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x)
+}
