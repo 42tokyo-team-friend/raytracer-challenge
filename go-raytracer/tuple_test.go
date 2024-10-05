@@ -81,3 +81,28 @@ func TestTupleMagnitude(t *testing.T) {
 		t.Error("Magnitude got wrong")
 	}
 }
+
+func TestTupleDot(t *testing.T) {
+	a := Vector(1, 2, 3)
+	b := Vector(2, 3, 4)
+	var ans float64 = 20
+
+	if a.Dot(b) != ans {
+		t.Error("Dot got wrong")
+	}
+}
+
+func TestTupleCross(t *testing.T) {
+	a := Vector(1, 2, 3)
+	b := Vector(2, 3, 4)
+	ans1 := Vector(-1, 2, -1)
+	ans2 := Vector(1, -2, 1)
+
+	if a.Cross(b) != ans1 {
+		t.Error("Cross got wrong")
+	}
+
+	if b.Cross(a) != ans2 {
+		t.Error("Cross got wrong")
+	}
+}
