@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -34,6 +35,24 @@ public:
         );
     }
 
+    Tuple operator*(double other) const {
+        return Tuple (
+            x * other,
+            y * other,
+            z * other,
+            w * other
+        );
+    }
+
+    Tuple operator/(double other) const {
+        return Tuple (
+            x / other,
+            y / other,
+            z / other,
+            w / other
+        );
+    }
+
     Tuple Neg() const {
         return Tuple (
             -1 * x,
@@ -41,6 +60,15 @@ public:
             -1 * z,
             -1 * w
         );
+    }
+
+    double magnitude() const {
+        return sqrt(x*x + y*y + z*z);
+    }
+
+    Tuple normalizing() {
+        double mag = magnitude();
+        return (*this) / mag;
     }
 };
 
@@ -52,10 +80,21 @@ Tuple Vector(double x, double y, double z) {
     return Tuple(x, y, z, 0.0);
 }
 
+double Dot(Tuple a, Tuple b) {
+    return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
+}
+
+Tuple cross(Tuple a, Tuple b) {
+    return Vector (
+        a.y * b.z - a.z * b.y,
+        a.z * b.x - a.x * b.z,
+        a.x * b.y - a.y * b.x
+    );
+}
+
 int main(){
-    Tuple a(1, -2, 3, -4);
-
-    Tuple Neg1 = a.Neg();
-
-    cout << Neg1.x << Neg1.y << Neg1.z << Neg1.w;
+    Tuple a = Vector(1, 2, 3);
+    Tuple b = Vector(2, 3, 4);
+    Tuple c = cross(a, b);
+    cout << c.x << c.y << c.z << endl;
 }
