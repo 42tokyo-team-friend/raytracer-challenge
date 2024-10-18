@@ -9,6 +9,8 @@ type Tuple struct {
 	w	float64
 }
 
+const Epsilon = 10e-5
+
 func Point(x float64, y float64, z float64) Tuple {
 	return Tuple{x, y, z, 1.0};
 }
@@ -33,6 +35,10 @@ func (t Tuple) Mul(k float64) Tuple {
 	return Tuple{t.x * k, t.y * k, t.z * k, t.w * k}
 }
 
+func (t Tuple) TupMul(other Tuple) Tuple {
+	return Tuple{t.x * other.x, t.y * other.y, t.z * other.z, t.w * other.w}
+}
+
 func (t Tuple) Div(k float64) Tuple {
 	return Tuple{t.x / k, t.y / k, t.z / k, t.w / k}
 }
@@ -47,4 +53,11 @@ func (left Tuple) Dot(right Tuple) float64 {
 
 func (left Tuple) Cross(right Tuple) Tuple {
 	return Vector(left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x)
+}
+
+func (left Tuple) Equals(right Tuple) bool {
+	return  math.Abs(left.x - right.x) < Epsilon && 
+			math.Abs(left.y - right.y) < Epsilon && 
+			math.Abs(left.z - right.z) < Epsilon && 
+			math.Abs(left.w - right.w) < Epsilon
 }
