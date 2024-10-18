@@ -1,6 +1,9 @@
 package goraytracer
 
-import "math"
+import (
+	"image/color"
+	"math"
+)
 
 type Tuple struct {
 	x	float64
@@ -60,4 +63,8 @@ func (left Tuple) Equals(right Tuple) bool {
 			math.Abs(left.y - right.y) < Epsilon && 
 			math.Abs(left.z - right.z) < Epsilon && 
 			math.Abs(left.w - right.w) < Epsilon
+}
+
+func (t Tuple) ToRGBA() color.RGBA {
+	return color.RGBA{uint8(t.x), uint8(t.y), uint8(t.z), 255}
 }
