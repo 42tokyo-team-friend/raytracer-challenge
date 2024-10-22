@@ -170,3 +170,12 @@ func (m *Mat4x4) Inv() *Mat4x4 {
         dst,
     }
 }
+
+func (m *Mat4x4) MulTup(t Tuple) Tuple {
+    return Tuple{
+        m.data[0][0] * t.x + m.data[0][1] * t.y + m.data[0][2] * t.z + m.data[0][3] * t.w,
+        m.data[1][0] * t.x + m.data[1][1] * t.y + m.data[1][2] * t.z + m.data[1][3] * t.w,
+        m.data[2][0] * t.x + m.data[2][1] * t.y + m.data[2][2] * t.z + m.data[2][3] * t.w,
+        m.data[3][0] * t.x + m.data[3][1] * t.y + m.data[3][2] * t.z + m.data[3][3] * t.w,
+    }
+}
