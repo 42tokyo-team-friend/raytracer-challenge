@@ -1,8 +1,8 @@
 package goraytracer
 
 import (
-	"testing"
 	"math"
+	"testing"
 )
 
 func TestLightningEyeBetweenightAndSurface(t *testing.T) {
@@ -14,6 +14,32 @@ func TestLightningEyeBetweenightAndSurface(t *testing.T) {
 	result := Lighting(m, light, position, eyev, normalv)
 
 	if !result.Equals(Vector(1.9, 1.9, 1.9)) {
+		t.Error("lightning got wrong.")
+	}
+}
+
+func TestLightingEyeOffset45(t *testing.T) {
+	m := NewMaterial()
+	position := Point(0, 0, 0)
+	eyev := Vector(0, math.Sqrt(2)/2, -math.Sqrt(2)/2)
+	normalv := Vector(0, 0, -1)
+	light := NewPointLight(Point(0, 0, -10), Vector(1, 1, 1))
+	result := Lighting(m, light, position, eyev, normalv)
+
+	if !result.Equals(Vector(1.0, 1.0, 1.0)) {
+		t.Error("lightning got wrong.")
+	}
+}
+
+func TestLightingLightOffset45(t *testing.T) {
+	m := NewMaterial()
+	position := Point(0, 0, 0)
+	eyev := Vector(0, 0, -1)
+	normalv := Vector(0, 0, -1)
+	light := NewPointLight(Point(0, 10, -10), Vector(1, 1, 1))
+	result := Lighting(m, light, position, eyev, normalv)
+
+	if !result.Equals(Vector(0.7364, 0.7364, 0.7364)) {
 		t.Error("lightning got wrong.")
 	}
 }

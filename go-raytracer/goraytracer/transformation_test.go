@@ -41,7 +41,7 @@ func TestRotationX(t *testing.T) {
 	}
 
 	if !RotationX(math.Pi / 4).Inv().MulTup(Point(0, 1, 0)).Equals(Point(0, math.Sqrt(2)/2, -math.Sqrt(2)/2)) {
-		t.Error("The inverse of x-rotation rotates in opposite direction.")
+		t.Error("The inverse of x-rotation rotates in opposite Direction.")
 	}
 }
 

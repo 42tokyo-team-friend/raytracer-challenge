@@ -1,8 +1,8 @@
 package goraytracer
 
 type Ray struct {
-	origin Tuple
-	direction Tuple
+	Origin    Tuple
+	Direction Tuple
 }
 
 func NewRay(origin Tuple, direction Tuple) *Ray {
@@ -13,12 +13,12 @@ func NewRay(origin Tuple, direction Tuple) *Ray {
 }
 
 func (r *Ray) Position(t float64) Tuple {
-	return r.origin.Add(r.direction.Mul(t))
+	return r.Origin.Add(r.Direction.Mul(t))
 }
 
 func (r *Ray) Transform(m *Mat4x4) *Ray {
 	return &Ray{
-		m.MulTup(r.origin),
-		m.MulTup(r.direction),
+		m.MulTup(r.Origin),
+		m.MulTup(r.Direction),
 	}
 }

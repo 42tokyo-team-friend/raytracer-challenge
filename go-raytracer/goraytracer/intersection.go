@@ -1,22 +1,22 @@
 package goraytracer
 
 type Intersection struct {
-	t float64
-	object *Sphere
+	T      float64
+	Object *Sphere
 }
 
 func Hit(intersections []Intersection) Intersection {
 	var it Intersection
 
-	min := -1.0
+	m := -1.0
 
 	for i := 0; i < len(intersections); i++ {
-		if intersections[i].t > 0 && min == -1 {
-			min = intersections[i].t
+		if intersections[i].T > 0 && m == -1 {
+			m = intersections[i].T
 			it = intersections[i]
 		}
-		if intersections[i].t > 0 && intersections[i].t < min {
-			min = intersections[i].t
+		if intersections[i].T > 0 && intersections[i].T < m {
+			m = intersections[i].T
 			it = intersections[i]
 		}
 	}
@@ -24,5 +24,5 @@ func Hit(intersections []Intersection) Intersection {
 }
 
 func (it *Intersection) Empty() bool {
-	return it.object == nil
+	return it.Object == nil
 }

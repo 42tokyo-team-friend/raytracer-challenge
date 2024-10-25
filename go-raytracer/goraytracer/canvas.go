@@ -7,8 +7,8 @@ import (
 )
 
 type Canvas struct {
-	data [][]Tuple
-	width int
+	data   [][]Tuple
+	width  int
 	height int
 }
 

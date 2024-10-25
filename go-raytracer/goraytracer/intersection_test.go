@@ -9,7 +9,7 @@ func TestHitAllPositiveT(t *testing.T) {
 	xs := []Intersection{i1, i2}
 	i := Hit(xs)
 
-	if i.t != 1 {
+	if i.T != 1 {
 		t.Error("hit got wrong")
 	}
 }
@@ -21,7 +21,7 @@ func TestHitWhenHaveNegative(t *testing.T) {
 	xs := []Intersection{i1, i2}
 	i := Hit(xs)
 
-	if i.t != 1 {
+	if i.T != 1 {
 		t.Error("hit got wrong")
 	}
 }
@@ -33,7 +33,7 @@ func TestHitAllNegative(t *testing.T) {
 	xs := []Intersection{i1, i2}
 	i := Hit(xs)
 
-	if i.object != nil {
+	if i.Object != nil {
 		t.Error("hit got wrong")
 	}
 }

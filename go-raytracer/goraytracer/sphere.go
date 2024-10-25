@@ -7,9 +7,9 @@ import (
 )
 
 type Sphere struct {
-	id uuid.UUID
+	id        uuid.UUID
 	transform *Mat4x4
-	material *Material
+	Material  *Material
 }
 
 func NewSphere() *Sphere {
@@ -27,18 +27,18 @@ func (s *Sphere) SetTransform(m *Mat4x4) {
 }
 
 func (s *Sphere) SetMaterial(m *Material) {
-	s.material = m
+	s.Material = m
 }
 
 func (s *Sphere) Intersect(r *Ray) []Intersection {
 	r2 := r.Transform(s.transform.Inv())
-	sphere_to_ray := r2.origin.Sub(Point(0, 0, 0))
-	a := r2.direction.Dot(r2.direction)
-	b := 2 * r2.direction.Dot(sphere_to_ray)
+	sphere_to_ray := r2.Origin.Sub(Point(0, 0, 0))
+	a := r2.Direction.Dot(r2.Direction)
+	b := 2 * r2.Direction.Dot(sphere_to_ray)
 	c := sphere_to_ray.Dot(sphere_to_ray) - 1
 
-	D := b * b - 4 * a * c
-	
+	D := b*b - 4*a*c
+
 	if D < 0 {
 		return []Intersection{}
 	}

@@ -1,4 +1,4 @@
-package main 
+package main
 
 import (
 	rt "goraytracer"
@@ -6,36 +6,43 @@ import (
 )
 
 func main() {
-	width := 200
-	height := 200
-	origin := rt.Point(0, 0, -6)
+	origin := rt.Point(0, 0, -5)
+	wallZ := 10.0
+	wallSizes := 7.0
+	canvasPixels := 1000
+	pixelSize := wallSizes / float64(canvasPixels)
+	half := wallSizes / 2.0
 	s := rt.NewSphere()
-	c := rt.NewCanvas(width, height)
+	c := rt.NewCanvas(canvasPixels, canvasPixels)
 	m := rt.NewMaterial()
 	m.Color = rt.Vector(1, 0.2, 1)
 	s.SetMaterial(m)
-	s.SetTransform(rt.Scaling(5.95, 5.95, 5.95))
 	light := rt.NewPointLight(rt.Point(-10, 10, -10), rt.Vector(1, 1, 1))
 
-	for y := height / 2 - 1; y > -height / 2; y-- {
-		for x := width / 2 - 1; x > -width / 2; x-- {
-			p := rt.Point(float64(x), float64(y), 0)
+	for y := 0; y < canvasPixels; y++ {
+		worldY := half - pixelSize*float64(y)
+		for x := 0; x < canvasPixels; x++ {
+			worldX := -half + pixelSize*float64(x)
+			p := rt.Point(worldX, worldY, wallZ)
 			r := rt.NewRay(origin, p.Sub(origin).Normalize())
 			xs := s.Intersect(r)
 			hit := rt.Hit(xs)
-			point := r.Position(hit.t)
-			
+
 			if !hit.Empty() {
-				c.Write(x + width / 2, y + height / 2, rt.Vector(1, 0, 0).Mul(255))
+				point := r.Position(hit.T)
+				normal := hit.Object.NormalAt(point)
+				eye := r.Direction.Neg()
+				color := rt.Lighting(hit.Object.Material, light, point, eye, normal).Mul(255)
+				c.Write(x, y, color)
 			} else {
-				c.Write(x + width / 2, y + height / 2, rt.Vector(0, 0, 0).Mul(255))
+				c.Write(x, y, rt.Vector(0, 0, 0))
 			}
 		}
 	}
-	
+
 	f, _ := os.Create("TestCanvasToImage.jpeg")
 
 	c.ToImage(f)
 
-	f.Close();
+	f.Close()
 }

@@ -6,20 +6,20 @@ import (
 )
 
 type Tuple struct {
-	x	float64
-	y	float64
-	z	float64
-	w	float64
+	x float64
+	y float64
+	z float64
+	w float64
 }
 
 const Epsilon = 10e-5
 
 func Point(x float64, y float64, z float64) Tuple {
-	return Tuple{x, y, z, 1.0};
+	return Tuple{x, y, z, 1.0}
 }
 
 func Vector(x float64, y float64, z float64) Tuple {
-	return Tuple{x, y, z, 0.0};
+	return Tuple{x, y, z, 0.0}
 }
 
 func (left Tuple) Add(right Tuple) Tuple {
@@ -47,15 +47,15 @@ func (t Tuple) Div(k float64) Tuple {
 }
 
 func (t Tuple) Magnitude() float64 {
-	return math.Sqrt(t.x * t.x + t.y * t.y + t.z * t.z + t.w * t.w)
+	return math.Sqrt(t.x*t.x + t.y*t.y + t.z*t.z + t.w*t.w)
 }
 
 func (left Tuple) Dot(right Tuple) float64 {
-	return left.x * right.x + left.y * right.y + left.z * right.z + left.w * right.w;
+	return left.x*right.x + left.y*right.y + left.z*right.z + left.w*right.w
 }
 
 func (left Tuple) Cross(right Tuple) Tuple {
-	return Vector(left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x)
+	return Vector(left.y*right.z-left.z*right.y, left.z*right.x-left.x*right.z, left.x*right.y-left.y*right.x)
 }
 
 func (t Tuple) Normalize() Tuple {
@@ -63,10 +63,10 @@ func (t Tuple) Normalize() Tuple {
 }
 
 func (left Tuple) Equals(right Tuple) bool {
-	return  math.Abs(left.x - right.x) < Epsilon && 
-			math.Abs(left.y - right.y) < Epsilon && 
-			math.Abs(left.z - right.z) < Epsilon && 
-			math.Abs(left.w - right.w) < Epsilon
+	return math.Abs(left.x-right.x) < Epsilon &&
+		math.Abs(left.y-right.y) < Epsilon &&
+		math.Abs(left.z-right.z) < Epsilon &&
+		math.Abs(left.w-right.w) < Epsilon
 }
 
 func (t Tuple) ToRGBA() color.RGBA {
@@ -79,4 +79,8 @@ func Dot(t1, t2 Tuple) float64 {
 
 func (in Tuple) Reflect(normal Tuple) Tuple {
 	return in.Sub(normal.Mul(2.0 * Dot(in, normal)))
+}
+
+func (t Tuple) Crop(k float64) Tuple {
+	return Tuple{math.Min(t.x, k), math.Min(t.y, k), math.Min(t.z, k), math.Min(t.w, k)}
 }
