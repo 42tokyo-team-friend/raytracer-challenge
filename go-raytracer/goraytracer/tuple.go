@@ -72,3 +72,11 @@ func (left Tuple) Equals(right Tuple) bool {
 func (t Tuple) ToRGBA() color.RGBA {
 	return color.RGBA{uint8(t.x), uint8(t.y), uint8(t.z), 255}
 }
+
+func Dot(t1, t2 Tuple) float64 {
+	return t1.Dot(t2)
+}
+
+func (in Tuple) Reflect(normal Tuple) Tuple {
+	return in.Sub(normal.Mul(2.0 * Dot(in, normal)))
+}

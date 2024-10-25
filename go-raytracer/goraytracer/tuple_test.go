@@ -116,3 +116,13 @@ func TestTupleMul(t *testing.T) {
 		t.Error("Tuple multiplication got wrong")
 	}
 }
+
+func TestTupleReflection(t *testing.T) {
+	v := Vector(0, -1, 0)
+	n := Vector(math.Sqrt(2)/2, math.Sqrt(2)/2, 0)
+	r := v.Reflect(n)
+
+	if !r.Equals(Vector(1, 0, 0)) {
+		t.Error("Tuple reflection got wrong.")
+	}
+}

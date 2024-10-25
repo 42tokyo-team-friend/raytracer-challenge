@@ -42,3 +42,11 @@ func (s *Sphere) Intersect(r *Ray) []Intersection {
 		{(-b + math.Sqrt(D)) / (2 * a), s},
 	}
 }
+
+func (s *Sphere) NormalAt(t Tuple) Tuple {
+	object_point := s.transform.Inv().MulTup(t)
+	object_normal := object_point.Sub(Point(0, 0, 0))
+	world_normal := s.transform.Inv().T().MulTup(object_normal)
+	world_normal.w = 0
+	return world_normal.Normalize()
+}
