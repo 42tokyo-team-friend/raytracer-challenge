@@ -18,7 +18,7 @@ func NewSphere() *Sphere {
 	}
 }
 
-func (s *Sphere) Intersect(r *Ray) []float64 {
+func (s *Sphere) Intersect(r *Ray) []Intersection {
 	sphere_to_ray := r.origin.Sub(Point(0, 0, 0))
 	a := r.direction.Dot(r.direction)
 	b := 2 * r.direction.Dot(sphere_to_ray)
@@ -27,11 +27,11 @@ func (s *Sphere) Intersect(r *Ray) []float64 {
 	D := b * b - 4 * a * c
 	
 	if D < 0 {
-		return []float64{}
+		return []Intersection{}
 	}
 
-	return []float64{
-		(-b - math.Sqrt(D)) / (2 * a),
-		(-b + math.Sqrt(D)) / (2 * a),
+	return []Intersection{
+		{(-b - math.Sqrt(D)) / (2 * a), s},
+		{(-b + math.Sqrt(D)) / (2 * a), s},
 	}
 }
