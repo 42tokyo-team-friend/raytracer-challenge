@@ -112,7 +112,7 @@ func TestTupleMul(t *testing.T) {
 	b := Vector(0.9, 1, 0.1)
 	ans := Vector(0.9, 0.2, 0.04)
 
-	if !a.TupMul(b).Equals(ans) {
+	if !a.MulTup(b).Equals(ans) {
 		t.Error("Tuple multiplication got wrong")
 	}
 }

@@ -9,6 +9,7 @@ import (
 type Sphere struct {
 	id uuid.UUID
 	transform *Mat4x4
+	material *Material
 }
 
 func NewSphere() *Sphere {
@@ -17,11 +18,16 @@ func NewSphere() *Sphere {
 	return &Sphere{
 		id,
 		NewIdentity(),
+		NewMaterial(),
 	}
 }
 
 func (s *Sphere) SetTransform(m *Mat4x4) {
 	s.transform = m
+}
+
+func (s *Sphere) SetMaterial(m *Material) {
+	s.material = m
 }
 
 func (s *Sphere) Intersect(r *Ray) []Intersection {

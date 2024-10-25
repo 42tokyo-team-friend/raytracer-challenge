@@ -38,7 +38,7 @@ func (t Tuple) Mul(k float64) Tuple {
 	return Tuple{t.x * k, t.y * k, t.z * k, t.w * k}
 }
 
-func (t Tuple) TupMul(other Tuple) Tuple {
+func (t Tuple) MulTup(other Tuple) Tuple {
 	return Tuple{t.x * other.x, t.y * other.y, t.z * other.z, t.w * other.w}
 }
 
