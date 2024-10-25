@@ -32,7 +32,7 @@ func main() {
 				point := r.Position(hit.T)
 				normal := hit.Object.NormalAt(point)
 				eye := r.Direction.Neg()
-				color := rt.Lighting(hit.Object.Material, light, point, eye, normal).Mul(255)
+				color := rt.Lighting(hit.Object.Material, light, point, eye, normal).Mul(255).Crop(255)
 				c.Write(x, y, color)
 			} else {
 				c.Write(x, y, rt.Vector(0, 0, 0))
@@ -40,7 +40,7 @@ func main() {
 		}
 	}
 
-	f, _ := os.Create("TestCanvasToImage.jpeg")
+	f, _ := os.Create("TestCanvasToImage.png")
 
 	c.ToImage(f)
 
