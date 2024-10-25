@@ -72,3 +72,18 @@ func TestSphereBehindRay(t *testing.T) {
 		t.Error("The ray intersects with a sphere in a wrong point")
 	} 
 }
+
+func TestIntersectingScaledSphere(t *testing.T) {
+	r := Ray{Point(0, 0, -5), Vector(0, 0, 1)}
+	s := NewSphere()
+	s.transform = Scaling(2, 2, 2)
+	xs := s.Intersect(&r)
+
+	if len(xs) != 2 {
+		t.Error("The ray intersects with a sphere in a wrog number of points")
+	}
+
+	if xs[0].t != 3.0 || xs[1].t != 7.0 {
+		t.Error("The ray intersects with a sphere in a wrong point")
+	} 
+}

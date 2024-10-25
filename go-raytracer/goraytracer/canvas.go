@@ -2,7 +2,7 @@ package goraytracer
 
 import (
 	"image"
-	"image/jpeg"
+	"image/png"
 	"io"
 )
 
@@ -40,5 +40,5 @@ func (c *Canvas) ToImage(out io.Writer) {
 			img.SetRGBA(x, y, c.Get(x, y).ToRGBA())
 		}
 	}
-	jpeg.Encode(out, img, &jpeg.Options{})
+	png.Encode(out, img)
 }

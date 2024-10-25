@@ -5,7 +5,7 @@ type Intersection struct {
 	object *Sphere
 }
 
-func hit(intersections []Intersection) Intersection {
+func Hit(intersections []Intersection) Intersection {
 	var it Intersection
 
 	min := -1.0
@@ -21,4 +21,8 @@ func hit(intersections []Intersection) Intersection {
 		}
 	}
 	return it
+}
+
+func (it *Intersection) Empty() bool {
+	return it.object == nil
 }
