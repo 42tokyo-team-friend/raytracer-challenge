@@ -58,6 +58,10 @@ func (left Tuple) Cross(right Tuple) Tuple {
 	return Vector(left.y * right.z - left.z * right.y, left.z * right.x - left.x * right.z, left.x * right.y - left.y * right.x)
 }
 
+func (t Tuple) Normalize() Tuple {
+	return t.Div(t.Magnitude())
+}
+
 func (left Tuple) Equals(right Tuple) bool {
 	return  math.Abs(left.x - right.x) < Epsilon && 
 			math.Abs(left.y - right.y) < Epsilon && 

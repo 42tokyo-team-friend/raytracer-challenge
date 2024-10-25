@@ -11,12 +11,12 @@ func main() {
 	origin := rt.Point(0, 0, -6)
 	s := rt.NewSphere()
 	c := rt.NewCanvas(width, height)
-	s.SetTransform(rt.Scaling(5.9, 5.9, 5.9))
+	s.SetTransform(rt.Scaling(5.95, 5.95, 5.95))
 
 	for y := height / 2 - 1; y > -height / 2; y-- {
 		for x := width / 2 - 1; x > -width / 2; x-- {
 			p := rt.Point(float64(x), float64(y), 0)
-			r := rt.NewRay(origin, p.Sub(origin))
+			r := rt.NewRay(origin, p.Sub(origin).Normalize())
 			xs := s.Intersect(r)
 			it := rt.Hit(xs)
 			
