@@ -21,9 +21,9 @@ func NewMaterial() *Material {
 }
 
 func Lighting(material *Material, light *PointLight, point Tuple, eyev Tuple, normalv Tuple) Tuple {
-	var Diffuse Tuple
-	var Ambient Tuple
-	var Specular Tuple
+	Diffuse := Vector(0, 0, 0) 
+	Ambient := Vector(0, 0, 0) 
+	Specular := Vector(0, 0, 0) 
 	
 	effective_color := material.Color.MulTup(light.intensity)
 	lightv := light.position.Sub(point).Normalize()
@@ -38,7 +38,7 @@ func Lighting(material *Material, light *PointLight, point Tuple, eyev Tuple, no
 		reflectv := lightv.Neg().Reflect(normalv)
 		reflect_dot_eye := Dot(reflectv, eyev)
 		if reflect_dot_eye <= 0 {
-			Specular = Vector(1, 1, 1)
+			Specular = Vector(0, 0, 0)
 		} else {
 			factor := math.Pow(reflect_dot_eye, material.Shininess)
 			Specular = light.intensity.Mul(material.Specular * factor)

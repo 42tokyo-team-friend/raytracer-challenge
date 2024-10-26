@@ -9,7 +9,7 @@ func main() {
 	origin := rt.Point(0, 0, -5)
 	wallZ := 10.0
 	wallSizes := 7.0
-	canvasPixels := 1000
+	canvasPixels := 500
 	pixelSize := wallSizes / float64(canvasPixels)
 	half := wallSizes / 2.0
 	s := rt.NewSphere()
